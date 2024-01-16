@@ -1,0 +1,7 @@
+.env
+
+**/output.json
+**/*.tfstate*
+**/.terraform*
+test/tf-outputs.tfvars
+test/test-report.json
