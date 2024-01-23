@@ -8,9 +8,11 @@ tofu output -json > output.json
 
 cd ..
 
-rm testing/tf-outputs.tfvars
+mkdir -p test/
+rm test/tf-outputs.tfvars
+touch test/tf-outputs.tfvars
 
 jq -c '. | keys[]' --raw-output terraform/output.json | while read key ; do
     value=$(jq -c ".$key.value" terraform/output.json )
-    echo "tf_output_$key=$value" >> testing/tf-outputs.tfvars
+    echo "tf_output_$key=$value" >> test/tf-outputs.tfvars
 done
