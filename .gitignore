@@ -5,3 +5,6 @@
 **/.terraform*
 test/tf-outputs.tfvars
 test/test-report.json
+
+.venv
+localstack_providers_override.tf
