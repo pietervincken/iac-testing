@@ -80,18 +80,18 @@ The tests required for this setup should focus on the correct deployment of the 
 
 1. `cd demo/3-orchestration-repo`
 2. `tflocal init`
-2. `ADDITIONAL_TF_OVERRIDE_LOCATIONS=./tests/validate-instance,./tests/create-s3-object,./tests/validate-s3-object tflocal test`
+3. `tflocal apply`
+4. `cd end-to-end-tests`
+5. `ADDITIONAL_TF_OVERRIDE_LOCATIONS=./create-s3-object,./validate-s3-object tflocal test`
+6. `cd ..`
+7. `tflocal destroy`
 
 Note: again the additional override location is needed to include the fixture modules in the tflocal override mechanism.
 
-##### 3-orchestration-repo/tests/main.tftest.hcl
-This file has 4 test fixtures: one to deploy the actual repository, a second one to validate the EC2 instance, one to deploy an S3 object and one to check the S3 object. 
+##### 3-orchestration-repo/end-to-end-tests/main.tftest.hcl
+This file has 3 test fixtures: one fetch the s3 bucket info through a data block, one to deploy an S3 object and one to check the S3 object. 
 
-The `validate-instance` module is used to fetch the instance details and validate that the instance has the expected IP address. 
-These types of tests validate that the different modules interact as expected and the outcome of the deployed orchestration is what is desired. 
-In a live scenario it's not recommended to check things like IP addresses as they tend to be more volatile, but it's a good showcase of how the additional information gathered throught the data blocks can be used to validate the configuration.
-
-The second part of the test validate that S3 object can be created and validate that the correct encryption method is applied.
+The test validates that an S3 object can be created and validates that the correct encryption method is applied.
 The `create-s3-object` module is responsible for creating the S3 object.
 Note that this explicitly doesn't set the desired encryption method.
 When fetching the object throught the data block in `validate-s3-object` the test can validate that the default SSE algorithm is applied.
