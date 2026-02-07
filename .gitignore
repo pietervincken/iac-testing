@@ -8,3 +8,4 @@ test/test-report.json
 
 .venv
 localstack_providers_override.tf
+.DS_Store
