@@ -1,25 +1,26 @@
 run "setup_vpc" {
   
-  command = apply
-
   module {
     source = "../vpc-module"
   }
+
   variables {
     env="tst"
     name="test-fixture-vpc"
   }
+
+  command = apply
 }
 
 run "minimal" {
-
-  command = apply
 
   variables {
     env="tst"
     name="test-fixture"
     subnet_id=run.setup_vpc.subnet_ids[0]
   }
+
+  command = apply
 
   assert {
       condition     = contains(keys(aws_instance.this.tags_all), "environment")
