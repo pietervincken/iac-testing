@@ -1,11 +1,11 @@
 run "minimal" {
 
-  command = apply
-
   variables {
     env="tst"
     name="standalone-module-test"
   }
+
+  command = apply
 
   assert {
       condition     = strcontains(aws_s3_bucket.this.id, "standalone-module-test")
