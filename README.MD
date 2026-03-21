@@ -8,12 +8,26 @@
 - OpenTofu binary (or Hashicorp Terraform).
 - Python3
 
-### How to use
+### How to use with localstack
 
-Run `source 1-install-localstack.sh`. This will create a python virtualenv and install the necessary tools (tf-local). You'll only have to run this once. 
+Run `source 1-install`. This will create a python virtualenv and install the necessary tools (tf-local). You'll only have to run this once. 
 
 Run `source 2-start-localstack.sh`. This will start localstack and make sure the virtualenv is enabled to allow for the tf-local binary to be found. You'll have to run this every time you use the demo. 
 
 Use the other test scripts to run the different scenarios. 
 
 Run `source 99-stop-localstack.sh`. This undoes what 101 did. It stops the localstack container and deactivates the virtualenv. 
+
+### How to use with moto
+
+Run `source 1-install`. This will create a python virtualenv and install the necessary tools (tf-local). You'll only have to run this once. 
+
+Run `source 2-start-moto.sh`. This will start moto and make sure the virtualenv is enabled to allow for the tf-local binary to be found. You'll have to run this every time you use the demo. This will also configure tf-local to use moto instead of localstack.
+
+Use the other test scripts to run the different scenarios. 
+
+Run `source 99-stop-moto.sh`. This undoes what 101 did. It stops the moto container and deactivates the virtualenv. 
+
+### Note
+
+Moto isn't working for 31-orchestration-test.sh as the AES default encryption isn't set like it is in localstack.
