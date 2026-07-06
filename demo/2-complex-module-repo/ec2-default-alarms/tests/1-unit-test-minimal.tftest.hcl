@@ -21,13 +21,14 @@ run "setup_ec2" {
 
 run "minimal" {
 
-  command = apply
-
   variables {
     env="tst"
     name="test-fixture"
     instance_id=run.setup_ec2.instance_id
   }
+
+  command = apply
+
   assert {
       condition     = try(length(output.ids) == 2 ,false)
       error_message = "Expected 2 CloudWatch alarm IDs to be returned"

@@ -8,6 +8,7 @@ if ! docker info > /dev/null 2>&1; then
 else
     echo "Docker is running. Starting LocalStack..."
     
+    # SKIP_SSL_CERT_DOWNLOAD=1 SKIP_INFRA_DOWNLOADS=1 DISABLE_EVENTS=1 localstack start --network rancher -d --host-dns
     localstack start --network rancher -d
     source .venv/bin/activate
     tflocal -version
