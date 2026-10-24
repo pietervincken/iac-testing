@@ -13,7 +13,7 @@ else
     echo "Docker is running. Starting moto..."
     
     # S3_IGNORE_SUBDOMAIN_BUCKETNAME=true moto_server -H 0.0.0.0 -p 4566
-    docker run --rm -d -p 4566:5000 -e S3_IGNORE_SUBDOMAIN_BUCKETNAME=true --name moto motoserver/moto:5.1.21 -H 0.0.0.0
+    docker run --rm -d -p 4566:5000 -e S3_IGNORE_SUBDOMAIN_BUCKETNAME=true --name moto motoserver/moto:5.2.2 -H 0.0.0.0
 
     source .venv/bin/activate
     tflocal -version

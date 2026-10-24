@@ -32,3 +32,18 @@ module "vm_alarms" {
   source = "../2-complex-module-repo/ec2-default-alarms"
   instance_id = module.vm.instance_id
 }
+
+resource "aws_s3_bucket" "test_bucket" {
+  bucket = "s3-prd-test"
+}
+
+module "nested_module" {
+  source = "./nested-module"
+}
+
+resource "aws_ssm_parameter" "secret" {
+  name        = "/production/database/password/main"
+  description = "The parameter description"
+  type        = "SecureString"
+  value       = "ver-very-secret-password"
+}
